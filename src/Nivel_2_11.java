@@ -1,86 +1,89 @@
 import java.util.Scanner;
 public class Nivel_2_11 {
-
+	
 	public static void main(String[] args) {
-		String unidadesr[]={"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"};
-		String decenasr[]={"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"};
+		String unidades[]={"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"};
+		String decenas[]={"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"};
+		String unidadesN[]={"", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve","diez","once","doce","trece","catorce","quince","dieciseis","diecisiete","dieciocho","diecinueve","veinte"};
+		String decenasN[]={"", "", "veinti", "treinta", "cuarenta", "cincuenta", "sesenta", "setenta", "ochenta", "noventa"};
 		
+		String listadoRomanos[];
 		Scanner s=new Scanner(System.in);
-		System.out.println("Ingrese un nœmero romano menor a 100");
-		String a=s.next();
-		int n1=0;
-		for(int i=0;i<decenasr.length;i++){
-			for(int j=0;j<unidadesr.length;j++){
-				if((decenasr[i]+unidadesr[j]).equals(a)){
-					n1=(i*10)+j;
+		System.out.println("Ingrese la cantidad de nœmeros romanos a ingresar");
+		int n=s.nextInt();
+		listadoRomanos=new String[n];
+		for(int a=0;a<listadoRomanos.length;a++){
+			System.out.println("Ingrese el nœmero romano");
+			listadoRomanos[a]=s.next();
+		}
+		
+		int listadoNumeros[];
+		listadoNumeros=new int[n];
+		for(int b=0;b<listadoNumeros.length;b++){
+			for(int i=0;i<decenas.length;i++){
+				for(int j=0;j<unidades.length;j++){
+					if((decenas[i]+unidades[j]).equals(listadoRomanos[b])){
+						listadoNumeros[b]=(i*10)+j;
+					}
 				}
 			}
 		}
 		
-		
-		
-		System.out.println("Ingrese otro nœmero romano menor a 100");
-		String b=s.next();
-		int n2=0;
-		for(int i=0;i<decenasr.length;i++){
-			for(int j=0;j<unidadesr.length;j++){
-				if((decenasr[i]+unidadesr[j]).equals(b)){
-					n2=(i*10)+j;
-				}
+		int dato1=listadoNumeros[0];
+		for(int c=0;c<listadoNumeros.length;c++){
+			if(listadoNumeros[c]<dato1){
+				dato1=listadoNumeros[c];
 			}
 		}
 		
-		
-		System.out.println("Ingrese otro nœmero romano menor a 100");
-		String c=s.next();
-		int n3=0;
-		for(int i=0;i<decenasr.length;i++){
-			for(int j=0;j<unidadesr.length;j++){
-				if((decenasr[i]+unidadesr[j]).equals(c)){
-					n3=(i*10)+j;
-				}
-			}
-		}
-		
-		
-		if(n1>n2&&n1>n3){
-			if(n2>n3){
-				System.out.println("El nœmero menor es: "+n3);
-				System.out.println("El nœmero mayor es: "+n1);
+		int uni=dato1%10;
+		int dec=(dato1/10)%10;
+		if(dato1>=30&&dato1<100){
+			if(dato1%10==0){
+				System.out.println("El nœmero menor es "+decenasN[dec]);
 			}
 			else{
-				System.out.println("El nœmero menor es: "+n2);
-				System.out.println("El nœmero mayor es: "+n1);
-			}
+			System.out.println("El nœmero menor es "+decenasN[dec]+" y "+unidadesN[uni]);
+			}	
 		}
 		else{
-			if(n2>n1&&n2>n3){
-				if(n1>n3){
-					System.out.println("El nœmero menor es: "+n3);
-					System.out.println("El nœmero mayor es: "+n2);
-				}
-				else{
-					System.out.println("El nœmero menor es: "+n1);
-					System.out.println("El nœmero mayor es: "+n2);
-				}
+			if(dato1>=21&&dato1<30){
+				System.out.println("El nœmero menor es "+decenasN[dec]+unidadesN[uni]);
 			}
 			else{
-				if(n3>n1&&n3>n2){
-					if(n1>n2){
-						System.out.println("El nœmero menor es: "+n2);
-						System.out.println("El nœmero mayor es: "+n3);
-					}
-					else{
-						System.out.println("El nœmero menor es: "+n1);
-						System.out.println("El nœmero mayor es: "+n3);
-					}
+				if(dato1<21){
+					System.out.println("El nœmero menor es "+unidadesN[dato1]);
 				}
 			}
 		}
-		System.out.println(n1);
-		System.out.println(n2);
-		System.out.println(n3);
 		
+		int dato2=listadoNumeros[0];
+		for(int d=0;d<listadoNumeros.length;d++){
+			if(listadoNumeros[d]>dato2){
+				dato2=listadoNumeros[d];
+			}
+		}
+		
+		uni=dato2%10;
+		dec=(dato2/10)%10;
+		if(dato2>=30&&dato2<100){
+			if(dato2%10==0){
+				System.out.println("El nœmero mayor es "+decenasN[dec]);
+			}
+			else{
+			System.out.println("El nœmero mayor es "+decenasN[dec]+" y "+unidadesN[uni]);
+			}	
+		}
+		else{
+			if(dato2>=21&&dato2<30){
+				System.out.println("El nœmero mayor es "+decenasN[dec]+unidadesN[uni]);
+			}
+			else{
+				if(dato2<21){
+					System.out.println("El nœmero mayor es "+unidadesN[dato2]);
+				}
+			}
+		}
 	}
 
 }
